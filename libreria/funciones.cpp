@@ -1,6 +1,6 @@
 #include "funciones.h"
 #include <string>
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 
