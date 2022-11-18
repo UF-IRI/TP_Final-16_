@@ -1,5 +1,7 @@
 #include <iostream>
+#include "general.h"
 #include "funciones.h"
+
 
 
 
@@ -184,6 +186,73 @@ int main() {
 
     arch1.close();
     arch2.close();
+
+
+
+
+    fstream ar, ar2, ar3;
+    ar.open("Secretaria.csv", ios::in);
+    ar2.open("Archivo.csv", ios::app);
+    ar3.open("Vuelven.csv", ios::out);
+
+    t_pacienteV* Pacientes_vuelven = new t_pacienteV[0];
+    int tamPV = 0;
+    int* ptamPV = &tamPV;
+    t_pacienteV paciente_aux1;
+    int retorna;
+    while (ar) {
+        //  arch1 >> coma >> paciente_aux1.nombre >> coma >> paciente_aux1.apellido >> coma >> paciente_aux1.numero >> coma >> paciente_aux1.id_os >> coma  >> paciente_aux1.nombre_medico >> coma >> paciente_aux1.apellido_medico >> coma >> paciente_aux1.id_medico >> coma >> paciente_aux1.especialidad_medico >> coma;
+        getline(ar, paciente_aux1.nombre, ',');
+        getline(ar, paciente_aux1.apellido, ',');
+        getline(ar, paciente_aux1.numero, ',');
+        getline(ar, paciente_aux1.id_os, ',');
+        getline(ar, paciente_aux1.nombre_medico, ',');
+        getline(ar, paciente_aux1.apellido_medico, ',');
+        getline(ar, paciente_aux1.id_medico, ',');
+        getline(ar, paciente_aux1.especialidad_medico);
+        retorna = rand() % 2;
+        if (retorna == 0) {
+            agregar_pacienteV(Pacientes_vuelven, paciente_aux1, ptamPV);
+        }
+        if (retorna == 1) {
+            ar2 << paciente_aux1.nombre << " " << paciente_aux1.apellido << "ARCHIVADO" << endl;
+        }
+    }
+    string nueva_os;
+    int aux_os;
+    for (int i = 0; i < *ptamPV; i++) {
+        aux_os = rand() % 6;
+        switch (aux_os) {
+        case 0:
+            nueva_os = "Medicus";
+            break;
+
+        case 1:
+            nueva_os = "OSDE";
+            break;
+        case 2:
+            nueva_os = "IOSFA";
+            break;
+        case 3:
+            nueva_os = "Italiano";
+            break;
+        case 4:
+            nueva_os = "Aleman";
+            break;
+        case 5:
+            nueva_os = "Espanyol";
+            break;
+        }
+
+        if (Pacientes_vuelven[i].id_os != nueva_os)Pacientes_vuelven[i].id_os == nueva_os;
+        ar3 << Pacientes_vuelven[i].nombre << coma << Pacientes_vuelven[i].apellido << coma << Pacientes_vuelven[i].numero << coma << Pacientes_vuelven[i].id_os << coma << Pacientes_vuelven[i].nombre_medico << coma << Pacientes_vuelven[i].apellido_medico << coma << Pacientes_vuelven[i].id_medico << coma << Pacientes_vuelven[i].especialidad_medico << endl;
+
+    }
+
+
+    ar.close();
+    ar2.close();
+    ar3.close();
 
     delete[] Pacientes;
     delete[] Medicos;

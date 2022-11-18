@@ -28,6 +28,18 @@ typedef struct {
 } t_paciente;
 
 typedef struct {
+    string nombre;
+    string apellido;
+    string numero;// DD/MM/YY   //fallecido , internado ,n/c
+    string id_os;
+    string nombre_medico;
+    string apellido_medico;
+    string id_medico;
+    string especialidad_medico;
+} t_pacienteV;
+
+
+typedef struct {
     string id;
     string nombre;  //podria ser un enum
 } t_obra_social;
@@ -47,3 +59,4 @@ typedef struct {
     string direccion;
     string mail;
 } t_contacto;
+

@@ -4,10 +4,27 @@
 using namespace std;
 
 
+
 void agregar_paciente(t_paciente*& Lista, t_paciente Nuevo, int* tamactual) {
 	*tamactual = *tamactual + 1;  //agranda 1 en tamaño de la lista
 	int i = 0;
 	t_paciente* aux = new t_paciente[*tamactual];
+	while (i < *tamactual - 1 && *tamactual - 1 != 0) {
+		aux[i] = Lista[i];        //copia todo lo de la lista vieja a la nueva
+		i++;
+	}
+	aux[i] = Nuevo;               //agrega el elemento a la ultima pos de la nueva lista
+
+	delete[] Lista;
+	Lista = aux;                  //reapunta el puntero a la nueva lista
+
+	return;
+}
+
+void agregar_pacienteV(t_pacienteV*& Lista, t_pacienteV Nuevo, int* tamactual) {
+	*tamactual = *tamactual + 1;  //agranda 1 en tamaño de la lista
+	int i = 0;
+	t_pacienteV* aux = new t_pacienteV[*tamactual];
 	while (i < *tamactual - 1 && *tamactual - 1 != 0) {
 		aux[i] = Lista[i];        //copia todo lo de la lista vieja a la nueva
 		i++;
@@ -283,10 +300,10 @@ void ClasificarPaciente(t_medico*& Lista_medicos, int* tamM, t_paciente*& Lista_
 
 				}
 
-				archivo2 << Lista_pacientes[i].nombre << ',' <<
-					Lista_pacientes[i].apellido << ',' <<
-					auxc.telefono << ',' <<
-					Lista_pacientes[i].id_os << ',' << Medico_aux.nombre << ',' << Medico_aux.apellido << ',' << Medico_aux.id << ',' << Medico_aux.especialidad << ',' << endl;
+				archivo2 << Lista_pacientes[i].nombre << " ," <<
+					Lista_pacientes[i].apellido << " ," <<
+					auxc.telefono << " ," <<
+					Lista_pacientes[i].id_os << " ," << Medico_aux.nombre << " ," << Medico_aux.apellido << " ," << Medico_aux.id << " ," << Medico_aux.especialidad << endl;
 			}
 		}
 	}
@@ -302,5 +319,4 @@ bool compararFechas(tm a, tm b) //retorna true si la primera es + reciente
 	if (a.tm_year == b.tm_year && a.tm_mon == b.tm_mon && a.tm_mday < b.tm_mday) return false;
 	if (a.tm_year == b.tm_year && a.tm_mon == b.tm_mon && a.tm_mday == b.tm_mday) return false;
 }
-
 

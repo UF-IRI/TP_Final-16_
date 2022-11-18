@@ -2,6 +2,7 @@
 #include "general.h"
 
 void agregar_paciente(t_paciente*& Lista, t_paciente Nuevo, int* tamactual);
+void agregar_pacienteV(t_pacienteV*& Lista, t_pacienteV Nuevo, int* tamactual);
 void agregar_medico(t_medico*& Lista, t_medico Nuevo, int* tamactual);
 void agregar_OS(t_obra_social*& Lista, t_obra_social Nuevo, int* tamactual);
 void agregar_consulta(t_consulta*& Lista, t_consulta Nuevo, int* tamactual);
