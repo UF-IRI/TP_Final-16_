@@ -1,5 +1,5 @@
 #pragma once
-#include "General.h"
+#include "general.h"
 
 void agregar_paciente(t_paciente*& Lista, t_paciente Nuevo, int* tamactual);
 void agregar_medico(t_medico*& Lista, t_medico Nuevo, int* tamactual);
@@ -12,6 +12,7 @@ void FiltrarMedicoRep(t_medico*& Lista, int* tamLista);
 void FiltrarContactoRep(t_contacto*& Lista, int* tamLista);
 
 bool MayorDiezAnios(tm fecha_Uconsulta, tm fecha_actual);
+
 
 tm PasaStringaFecha(string a);
 

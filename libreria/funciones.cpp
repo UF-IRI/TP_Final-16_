@@ -1,4 +1,4 @@
-#include "Funciones.h"
+#include "funciones.h"
 #include <string>
 #include<iostream>
 using namespace std;
@@ -19,6 +19,7 @@ void agregar_paciente(t_paciente*& Lista, t_paciente Nuevo, int* tamactual) {
 
 	return;
 }
+
 void agregar_medico(t_medico*& Lista, t_medico Nuevo, int* tamactual) {
 	*tamactual = *tamactual + 1;
 	int i = 0;
@@ -58,6 +59,7 @@ void agregar_consulta(t_consulta*& Lista, t_consulta Nuevo, int* tamactual) {
 	Lista = aux;
 	return;
 }
+
 void agregar_contacto(t_contacto*& Lista, t_contacto Nuevo, int* tamactual) {
 	*tamactual = *tamactual + 1;
 	int i = 0;
@@ -71,6 +73,7 @@ void agregar_contacto(t_contacto*& Lista, t_contacto Nuevo, int* tamactual) {
 	Lista = aux;
 	return;
 }
+
 void FiltrarPacienteRep(t_paciente*& Lista, int* tamP) {
 	int cont = 0, i, j;
 	for (i = 0; i < *tamP - 1; i++) {
@@ -119,6 +122,7 @@ void FiltrarMedicoRep(t_medico*& Lista, int* tamM) {
 	*tamM -= cont; //saco de la lista a los repetidos que me quedaron al final 
 	return;
 }
+
 void FiltrarContactoRep(t_contacto*& Lista, int* tamM) {
 	int cont = 0, i, j;
 	for (i = 0; i < *tamM - 1; i++) {
@@ -185,6 +189,8 @@ bool MayorDiezAnios(tm fecha_Uconsulta, tm fecha_actual)
 	}
 }
 
+
+
 tm PasaStringaFecha(string a) //fecha si o si formato = DD/MM/AAAA
 {
 	tm f;
@@ -249,7 +255,11 @@ void ClasificarPaciente(t_medico*& Lista_medicos, int* tamM, t_paciente*& Lista_
 			else if (Lista_pacientes[i].estado == "internado" || Lista_pacientes[i].estado == "n/c") {
 				for (int k = 0; k < *tamM; k++)
 				{
-					if (Ultima_consulta(Lista_Consultas, tamC, Lista_pacientes[i]).id_medico == Lista_medicos[k].id)
+
+					t_consulta consAux;
+					consAux = Ultima_consulta(Lista_Consultas, tamC, Lista_pacientes[i]);
+
+					if (consAux.id_medico == Lista_medicos[k].id)
 					{
 						Medico_aux = Lista_medicos[k];
 					}

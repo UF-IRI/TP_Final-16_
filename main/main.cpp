@@ -12,6 +12,8 @@ int main() {
     t_obra_social* ObrasS = new t_obra_social[0];
     t_contacto* Contactos = new  t_contacto[0];
 
+    string trash;
+
     int tamP = 0;
     int* ptamP = &tamP;
 
@@ -47,13 +49,50 @@ int main() {
     string H_paciente, dummy; //guardamos los headers de cada archivo --> como unimos el de pacientes con contactos se repite el id/dni de la persona --> dummy
     arch1 >> H_paciente >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente;
     arch2 >> dummy >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente >> coma >> H_paciente;
+    arch1.get();
     while (arch1) {
-        arch1 >> paciente_aux.dni >> coma >> paciente_aux.nombre >> coma >> paciente_aux.apellido >> coma >> paciente_aux.sexo >> coma >> paciente_aux.nacimiento >> coma >> paciente_aux.estado >> coma >> paciente_aux.id_os;
+        //arch1 >> paciente_aux.dni >> coma >> paciente_aux.nombre >> coma >> paciente_aux.apellido >> coma >> paciente_aux.sexo >> coma >> paciente_aux.nacimiento >> coma >> paciente_aux.estado >> coma >> paciente_aux.id_os;
+
+        getline(arch1, paciente_aux.dni, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.nombre, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.apellido, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.sexo, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.nacimiento, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.estado, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, paciente_aux.id_os);
+
         agregar_paciente(Pacientes, paciente_aux, ptamP);
     }
     //agregamos el paciente
+    arch2.get();
     while (arch2) {
-        arch2 >> contacto.dni_paciente >> coma >> contacto.telefono >> coma >> contacto.celular >> coma >> contacto.direccion >> coma >> contacto.mail;
+        //arch2 >> contacto.dni_paciente >> coma >> contacto.telefono >> coma >> contacto.celular >> coma >>  >> coma >> contacto.mail;
+
+        getline(arch2, contacto.dni_paciente, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, contacto.telefono, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, contacto.celular, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, contacto.direccion, ',');
+        arch2.get();
+        getline(arch2, contacto.mail);
+
         agregar_contacto(Contactos, contacto, ptamCo);
     }
 
@@ -77,8 +116,27 @@ int main() {
         arch1 >> obsc_aux.id >> coma >> obsc_aux.nombre;
         agregar_OS(ObrasS, obsc_aux, ptamOS);
     }
+
     while (arch2) {
-        arch2 >> medico_aux.id >> coma >> medico_aux.nombre >> coma >> medico_aux.apellido >> coma >> medico_aux.telefono >> coma >> medico_aux.especialidad >> coma >> medico_aux.activo;
+        //arch2 >> medico_aux.id >> coma >> medico_aux.nombre >> coma >> medico_aux.apellido >> coma >> medico_aux.telefono >> coma >> medico_aux.especialidad >> coma >> medico_aux.activo;
+        arch2.get();
+        getline(arch2, medico_aux.id, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, medico_aux.nombre, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, medico_aux.apellido, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, medico_aux.telefono, ' ');
+        arch2.get();
+        arch2.get();
+        getline(arch2, medico_aux.especialidad, ' ');
+        arch2.get();
+        arch2.get();
+        arch2 >> medico_aux.activo;
+
         agregar_medico(Medicos, medico_aux, ptamM);
     }
     arch1.close();
@@ -92,8 +150,22 @@ int main() {
     t_consulta consulta_aux;
     string H_consulta;
     arch1 >> H_consulta >> coma >> H_consulta >> coma >> H_consulta >> coma >> H_consulta >> coma >> H_consulta;
+    arch1.get();
     while (arch1) {
-        arch1 >> consulta_aux.dni_paciente >> coma >> consulta_aux.fecha_solicitado >> coma >> consulta_aux.fecha_turno >> coma >> consulta_aux.presento >> coma >> consulta_aux.id_medico;
+        //arch1 >> consulta_aux.dni_paciente >> coma >> consulta_aux.fecha_solicitado >> coma >> consulta_aux.fecha_turno >> coma >> consulta_aux.presento >> coma >> consulta_aux.id_medico;
+        getline(arch1, consulta_aux.dni_paciente, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, consulta_aux.fecha_solicitado, ' ');
+        arch1.get();
+        arch1.get();
+        getline(arch1, consulta_aux.fecha_turno, ' ');
+        arch1.get();
+        arch1.get();
+        arch1 >> consulta_aux.presento >> coma;
+        arch1.get();
+        getline(arch1, consulta_aux.id_medico);
+
         agregar_consulta(Consultas, consulta_aux, ptamC);
     }
     arch1.close();
@@ -101,10 +173,10 @@ int main() {
     // SE FILTRAN LOS MEDICOS Y PACIENTES REPETIDOS
     FiltrarMedicoRep(Medicos, ptamM);
     FiltrarPacienteRep(Pacientes, ptamP);
-    FiltrarContactoRep(Contactos, ptamCo);
+    // FiltrarContactoRep(Contactos, ptamCo);
 
 
-    //---------CODIGO----------//
+     //---------CODIGO----------//
 
     arch1.open("Archivo.csv", ios::out);
     arch2.open("Secretaria.csv", ios::out);
@@ -112,7 +184,6 @@ int main() {
 
     arch1.close();
     arch2.close();
-
 
     delete[] Pacientes;
     delete[] Medicos;
